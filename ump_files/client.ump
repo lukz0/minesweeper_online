@@ -1,0 +1,58 @@
+//Abstract
+class GUI_View {
+  Client_State_Machine parent;
+  //Abstract
+  void receiveEvent() {}
+}
+
+class Enter_Url_View {
+  isA GUI_View;
+}
+
+//Abstract
+class Select_Game_View {
+  isA GUI_View;
+}
+
+class Select_Game_Search_View {
+  isA Select_Game_View;
+}
+
+class Select_Game_Host_Game_View {
+  isA Select_Game_View;
+}
+
+class Game_View {
+  isA GUI_View;
+}
+
+class Client_State_Machine {
+  WebSocket_Connection connection;
+  GUI_View view;
+  GUI_View changeView(String url) {}
+  void sendEvent() {}
+  void receiveEvent() {
+    this.view.receiveEvent();
+  }
+  void connectTo(String url) {
+    this.connection.connectTo(String url);
+  }
+}
+
+association {  
+  * GUI_View -- * Client_State_Machine;  
+}
+
+association {
+  * WebSocket_Connection -- * Client_State_Machine;
+}
+
+class WebSocket_Connection {
+  Client_State_Machine parent;
+  void connectTo(String url) {
+    //CODE
+  }
+  void sendEvent(String evt) {
+    //CODE
+  }
+}
